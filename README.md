@@ -1,4 +1,4 @@
-# CHECKOUT AND BUILD CHROMIUM WALKTHROUGH
+# CHECKOUT AND BUILD CHROMIUM WALKTHROUGH | [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/_DiegoMoura.svg?style=social&label=Follow%20%40_DiegoMoura)](https://twitter.com/_DiegoMoura)
 [Official Checking out and building Chromium for Mac](https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md#System-requirements).
 ## My experience and tips
 
@@ -86,4 +86,33 @@ Fixing it:
 
 > tip 2: Official guide on StackOverflow on how to correct the xcode-select PATH [here](https://stackoverflow.com/questions/17980759/xcode-select-active-developer-directory-error/17980786#17980786).
 
+#### *Build Errors:*
+My first attemp to build failed returning 6 errors:
+1) `fatal error: PCH file 'obj/ui/views/views/precompile.h-cc.gch' not found: module file not found`
+2) `fatal error: cannot open file '../../base/numerics/checked_math_impl.h': Too many open files in system`
+3) `fatal error: cannot open file '../../../../../../Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/usr/include/mach/mach_types.h': Too many open files in system`
+3) `fatal error: 'SearchKit/SKSummary.h' file not found`
+4) `fatal error: cannot open file '../../third_party/ced/src/pthread.h': Too many open files in system`
+5) `fatal error: cannot open file '../../../../../../Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/usr/include/mach/task_info.h': Too many open files in system`
 
+I decide to try build again and the second time it was sucessful.
+> Note: The second build displayed a smaller number of files to build, that when I compared to the number of files missing from the first build it was clear that the second build started were the first have stopped.
+* [26797/49069] - First Failed Build
+* [22278/22278] - Second completed Build
+> Note 2: The first build took around 6 hours to complete the 26796 files, while the second build took around 18 hours for the 22278 files.
+### Step 5
+#### *Run Chromium*
+Now running Chromium should be easy.
+Run.
+```
+$ out/Default/Chromium.app/Contents/MacOS/Chromium
+```
+> Note 3: Remember to correct the PATH according to name you use for your directory.
+
+&nbsp;
+
+##### The application should start and the blue logo of Chromium should appear on your dock. Congrats! You built Chromium.
+___
+##### Important note: This walkthrough **is not in any way a substitute for the [official documentation](https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md)**, my intention is only to share my experience in the hope of helping other devs facing similar problems.
+___
+##### As I found out more about the other processes part of contributing to the project, like the git workflow; CL submission, review and approval I will be adding my notes and tips to this repository.
